@@ -107,6 +107,21 @@ def download_large_google_drive_file(url, save_path):
     download_file(confirmed_link, save_path, session)
 
 
+def set_cache_path(custom_path=None):
+    """
+    Set a custom path for the cached dataset.
+    
+    Args:
+        custom_path (str): The directory where the dataset should be cached.
+    """
+    global CACHE_FILE_PATH
+    if custom_path:
+        CACHE_FILE_PATH = os.path.join(custom_path, 'emnist.zip')
+    else:
+        CACHE_FILE_PATH = os.path.expanduser('~/.cache/emnist/emnist.zip')
+    LOGGER.info(f"Cache path set to: {CACHE_FILE_PATH}")
+
+
 def get_cached_data_path():
     """Return the path where the EMNIST data is (or will be) cached."""
     return os.path.expanduser(CACHE_FILE_PATH)
